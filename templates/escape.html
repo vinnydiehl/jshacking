@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% set title = 'Escape From My... Encryption?' %}
+
+{% block top %}
+<h1>JavaScript Hacking</h1>
+<h2>Escape From My... Encryption?</h2>
+{% endblock %}
+
+{% block body %}
+
+<script type="text/javascript">
+function check(x)
+{
+    wtfisthis = unescape('%23%6A%32%6E%2A%48%33');
+    
+    if (x == wtfisthis)
+    {
+        alert("Move along.");
+        post("{{ url_for('verify', sender='escape') }}", { pass: document.getElementById('pass').value });
+    }
+    else alert("Nope...");
+}
+</script>
+
+<p>What an ugly string of crap...</p>
+Password: <input type="password" id="pass" />
+<button onclick="javascript:check(document.getElementById('pass').value)">Check Password</button>
+{% endblock %}

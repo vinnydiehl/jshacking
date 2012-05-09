@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% set title = "Let's Do Some Math" %}
+
+{% block top %}
+<h1>JavaScript Hacking</h1>
+<h2>Let's Do Some Math</h2>
+{% endblock %}
+
+{% block body %}
+
+<script type="text/javascript">
+var fu = 2 + 8 * 5
+var bar = fu % 4
+var awww = bar * 2 + 4
+var yeah = awww / 3
+
+function check(x)
+{
+    if (x.length == awww)
+    {
+        alert("Not bad.");
+        post("{{ url_for('verify', sender='math') }}", { pass: document.getElementById('pass').value });
+    }
+    else alert("Nope.");
+}
+</script>
+
+<p>This one is child's play.</p>
+Password: <input type="password" id="pass" />
+<button onclick="javascript:check(document.getElementById('pass').value)">Check Password</button>
+{% endblock %}

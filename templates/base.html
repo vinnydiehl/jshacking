@@ -1,0 +1,40 @@
+{% set favicon = url_for('static', filename='images/icons/favicon-js.ico') %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<title>{{ title }}</title>
+
+<link rel="icon" type="image/x-icon" href="{{ favicon }}" />
+<link rel="shortcut icon" type="image/x-icon" href="{{ favicon }}" />
+{% if iOS %}
+<link rel="apple touch icon" type="image/png" href="{{ url_for('static', filename='images/icons/java-logo.png') }}" />
+{% endif %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}?req={{ time }}" />
+
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/post.js') }}"></script>
+
+{% block headscript %}
+{% endblock %}
+
+</head>
+<body>
+<div id="main" align="center">
+
+{% block top %}
+{% endblock %}
+
+<div id="thinline"></div>
+
+{% block body %}
+{% endblock %}
+
+<div id="foot">This app is &#169; 2012 Vinny Diehl. Mistakes, suggestions, or comments? <a href="mailto:gbchaosmaster926@gmail.com">Contact the developer</a>.</div>
+
+</div>
+</body>
+</html>

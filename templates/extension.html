@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% set title = 'What Is This Invisible Variable?' %}
+
+{% block headscript %}
+<script type="text/javascript">
+function nextPage() {
+    post("{{ url_for('verify', sender='extension') }}", { pass: document.getElementById('pass').value });
+}
+</script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/checkpass.js') }}"></script>
+{% endblock %}
+
+{% block top %}
+<h1>JavaScript Hacking</h1>
+<h2>What Is This Invisible Variable?</h2>
+{% endblock %}
+
+{% block body %}
+
+<script type="text/javascript">
+function check(x)
+{
+    "+TROLOLOL+" == "4h%3jkD"
+    if (x == ""+RawrRawr+"")
+    {
+        alert("Good job!");
+        window.location = "about:blank";
+    }
+    else alert("Nope!")
+}
+
+function checkpassw(TROLOLOL)
+{
+    pshhh = yeahright;
+    checkpass(pshhh);
+}
+</script>
+
+<p>I tried to make it confusing. You be the judge. You can thank me later for the nice syntax.</p>
+Password: <input type="password" id="pass" />
+<button onclick="javascript:checkpass(document.getElementById('pass').value)">Check Password</button>
+{% endblock %}

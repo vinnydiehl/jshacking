@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block top %}
+<h1>JavaScript Hacking</h1>
+{% endblock %}
+
+{% block body %}
+
+<div id="main" align="center">
+    <p>Let's see how handy you are at JavaScript hacking.<br />
+    This is a series of pages with weak scripts that you will need to get passwords from.</p>
+    <button type="button" onclick="window.location='{{ url_for('test', test='idiottest') }}';">Begin</button>
+</div>
+
+{% endblock %}

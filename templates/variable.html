@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% set title = 'But It Said It Was A Variable!' %}
+
+{% block top %}
+<h1>JavaScript Hacking</h1>
+<h2>But It Said It Was A Variable!</h2>
+{% endblock %}
+
+{% block body %}
+
+<script type="text/javascript">																																																																																																																																							TROLOLOL = "cU8^5-e";
+function check(x)
+{
+    "+TROLOLOL+" == "g&3d!L2"
+    if (x == ""+TROLOLOL+"")
+    {
+        alert("Awww yeah! Move along.");
+        post("{{ url_for('verify', sender='variable') }}", { pass: document.getElementById('pass').value });
+
+    }
+    else alert("Nah. Try harder.");
+}
+</script>
+
+<p>Yes, I'm trying to trick you. No, I didn't screw up.</p>
+Password: <input type="password" id="pass" />
+<button onclick="javascript:check(document.getElementById('pass').value)">Check Password</button>
+{% endblock %}

@@ -1,0 +1,77 @@
+html, body {
+    color: #000;
+    font: 13px/1.231 arial,helvetica,clean,sans-serif;
+}
+
+a {
+    color: #0645AD;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #36B;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #F00;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #800080;
+    text-decoration: underline;
+}
+
+h1 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+}
+h2 {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 0;
+    margin: 0;
+}
+h3 {
+    font-size: 1.1em;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    margin: 10px 0 0;
+    background-color: #555;
+    color: #FFF;
+    border: 1px solid #000;
+    border-bottom: 0;
+}
+
+#wrap {
+    width: 900px;
+    margin: 0 auto;
+}
+
+/* Top Line */
+
+#thinline {
+    border-top: 1px #999 solid;
+    margin-top: 10px;
+}
+
+/* Footer */
+
+#foot {
+    color: #666;
+    border-top: 1px #999 solid;
+    margin-top: 10px;
+    padding-top: 5px;
+    font-style: italic;
+    font-size: 77%;
+    text-decoration: none;
+    text-align: center;
+}
+#foot a, #foot a:visited { text-decoration: none; }
+#foot a:hover { text-decoration: underline; }

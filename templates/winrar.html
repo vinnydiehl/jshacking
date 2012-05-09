@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% set title = 'WinRAR!' %}
+
+{% block top %}
+<h1>JavaScript Hacking</h1>
+<h2>WinRAR!</h2>
+{% endblock %}
+
+{% block body %}
+
+<img src="{{ url_for('static', filename='images/winrar-is-you.png') }}" width="254" height="192" alt="You are a WinRAR!" style="margin-top: 10px;" />
+{% endblock %}

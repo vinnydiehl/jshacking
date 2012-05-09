@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% set title = 'The Idiot Test' %}
+
+{% block headscript %}
+<!-- All of this extra whitespace is just an artifact of dynamic page generation. Deal with it. -->
+{% endblock %}
+
+{% block top %}
+<h1>JavaScript Hacking</h1>
+<h2>The Idiot Test</h2>
+{% endblock %}
+
+{% block body %}
+
+<script type="text/javascript">
+function check(x)
+{
+    if (x=="k8h&a6@")
+    {
+        alert("Nice.");
+        post("{{ url_for('verify', sender='idiottest') }}", { pass: document.getElementById('pass').value });
+    }
+    else alert("Try again bro.");
+}
+
+// Yeah, this is called the idiot test for a reason. The first few are easy.
+</script>
+
+<p>If you can't get this, you're stupid.</p>
+Password: <input type="password" id="pass" />
+<button onclick="javascript:check(document.getElementById('pass').value)">Check Password</button>
+{% endblock %}
