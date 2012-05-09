@@ -36,6 +36,10 @@ def index():
 @app.route('/<test>/')
 def test(test):
     ''' The rest of these are the pages with the tests. '''
+    if test not in sequence:
+        # If the URL is not that of one of the tests, 404
+        abort(404)
+
     return render_template(test + '.html', iOS=iOSCheck(request.headers),
                                            time='%d' % time())
 
