@@ -1,21 +1,22 @@
 # JavaScript Hacking - A skill test for finding vulnerabilities in JavaScript.
 # Copyright (C) 2012 Vinny Diehl
 # 
-# This program is free software: you can redistribute it and/or modify
+# This application is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 # 
-# This program is distributed in the hope that it will be useful,
+# This application is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # 
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this application.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from flask import Flask, url_for, render_template, request, redirect, abort
+from flask import Flask, url_for, render_template, request, \
+                  redirect, abort, session
 from time import time
 
 app = Flask(__name__)
@@ -56,6 +57,10 @@ def test(test):
         # If the URL is not that of one of the tests, 404
         abort(404)
 
+    if test != sequence[0] and \
+       not session.get(sequence[sequence.index(test) - 1], False):
+        return 'Page accessed illegally.'
+
     return render_template(test + '.html', iOS=iOSCheck(request.headers),
                                            time='%d' % time())
 
@@ -72,6 +77,7 @@ def verify(sender):
         # The form was submitted, check their password
         if answers[sender](request.form['pass']):
             # The lambda in answers returned True, they got it right
+            session[sender] = True
             return redirect(
                 # Advance the index of sender by one, and redirect there
                 url_for('test', test=sequence[sequence.index(sender) + 1])
@@ -79,6 +85,11 @@ def verify(sender):
     else:
         # There is no POST, the user tried to enter the URL for this page
         return 'This page has been accessed illegally.'
+
+# Read in the secret_key from key.pvt
+# key.pvt is on the server, but not on GitHub.
+# Create your own secret_key if you wish to run this application.
+app.secret_key = open('key.pvt').read()
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
