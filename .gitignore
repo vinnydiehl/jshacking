@@ -38,6 +38,5 @@ venv/
 # Shell Files to Automate Processes
 *.sh
 
-# GitHub Files
-generate_secret_key.py
-README.md
+# secret_key File
+key.pvt
