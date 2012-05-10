@@ -34,3 +34,7 @@ nosetests.xml
 
 # Virtualenv artifacts
 venv/
+
+# GitHub Files
+generate_secret_key.py
+README.md
