@@ -37,6 +37,3 @@ venv/
 
 # Shell Files to Automate Processes
 *.sh
-
-# secret_key File
-key.pvt
