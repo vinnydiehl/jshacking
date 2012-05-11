@@ -16,7 +16,7 @@
 <script type="text/javascript">
 function check(x)
 {
-    if (x=="k8h&a6@")
+    if (x=="{{ answer }}")
     {
         alert("Nice.");
         post("{{ url_for('verify', sender='idiottest') }}", { pass: document.getElementById('pass').value });

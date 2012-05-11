@@ -1,16 +1,16 @@
 # JavaScript Hacking - A skill test for finding vulnerabilities in JavaScript.
 # Copyright (C) 2012 Vinny Diehl
-# 
+#
 # This application is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This application is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this application.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -18,8 +18,11 @@ import os
 from flask import Flask, url_for, render_template, request, \
                   redirect, abort, session
 from time import time
+from random import random
 
 app = Flask(__name__)
+
+globals()['key'] = int(random() * 1e8 + 1e8) # big random number
 
 def iOSCheck(head):
     ''' Checks if the user is on an iOS device. '''
@@ -34,15 +37,26 @@ sequence = [
     'extension', 'obfuscation', 'winrar'
 ]
 
-# Has lambdas that check their respective tests' passwords
+def generate_answer(test):
+    ''' Prototypical attempt at generating unique answers for each session. '''
+    key = globals()['key']
+    if test == 'idiottest':
+        # turn the key into a random string of 8 capital letters
+        return ''.join(chr((key % 128 * i) % 26 + 65) for i in range(2, 10))
+
+# Mapping of tests to acceptable password criteria
 answers = {
-    'idiottest': lambda s: s == 'k8h&a6@',
-    'math': lambda s: len(s) == 8,
-    'variable': lambda s: s == 'cU8^5-e',
-    'escape': lambda s: s == '#j2n*H3',
-    'extension': lambda s: s == 'narwhal bacons',
-    'obfuscation': lambda s: s == 'o!aZz4v'
+    'idiottest':   generate_answer('idiottest'),
+    'math':        8,
+    'variable':    'cU8^5-e',
+    'escape':      '#j2n*H3',
+    'extension':   'narwhal bacons',
+    'obfuscation': 'o!aZz4v'
 }
+
+def prepare(sender):
+    ''' Adjusts input prior to comparison against test criteria. '''
+    return len if sender == 'math' else str
 
 @app.route('/')
 def index():
@@ -62,7 +76,8 @@ def test(test):
         return 'Page accessed illegally.'
 
     return render_template(test + '.html', iOS=iOSCheck(request.headers),
-                                           time='%d' % time())
+                                           time='%d' % time(),
+                                           answer=generate_answer(test))
 
 @app.route('/<sender>/verify', methods=['GET', 'POST'])
 def verify(sender):
@@ -72,11 +87,11 @@ def verify(sender):
         # Only the senders in the sequence list (except the last one) have
         # verify pages, 404 them if the URL is invalid
         abort(404)
-    
+
     if request.method == 'POST':
         # The form was submitted, check their password
-        if answers[sender](request.form['pass']):
-            # The lambda in answers returned True, they got it right
+        if answers[sender] == prepare(sender)(request.form['pass']):
+            # The prepared password meets the necessary criteria, STAGE CLEAR!
             session[sender] = True
             return redirect(
                 # Advance the index of sender by one, and redirect there
